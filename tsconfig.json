@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "utils/calculateOpponentTurn.js", "utils/miniMax.js"  ]
+, "utils/calculateOpponentTurn.js", "utils/miniMax.js", "__tests__/minimax-test.js"  ]
 }
