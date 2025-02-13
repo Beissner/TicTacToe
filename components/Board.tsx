@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, Button, Modal, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Modal, Pressable } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
 import Square from './Square'
-import calculateOpponentTurn from '../utils/calculateOpponentTurn';
-import calculateWinner from '../utils/calculateWinner';
+import { calculateOpponentTurn } from '../utils/calculateOpponentTurn';
+import { calculateWinner } from '../utils/calculateWinner';
 
 interface BoardProps {
     isUserFirst: boolean;
@@ -16,33 +16,33 @@ export default function Board({isUserFirst, setShowBoard}: BoardProps) {
     const [tiles, setTiles] = useState(Array(9).fill(null));
     const [gameOver, setGameOver] = useState<boolean>(false);
     const [gameOverText, setGameOverText] = useState<string | null>(null);
-    const [showPlayAgainButton, setShowPlayAgainButton] = useState<boolean>(false);
-    const [isUserTurn, setIsUserTurn] = useState<boolean>(isUserFirst);
     const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
-        if (!isUserTurn) {
+        // handle computer first move
+        if (!isUserFirst) {
             const boardCopy = tiles.slice();
-            opponentTurn(boardCopy);
+            boardCopy[4] = 'O';
+            setTiles(boardCopy);
         }
-      }, [isUserTurn]);
+      }, [isUserFirst]);
 
     const handleOnPressSquare = (index: number) => {
-
-        // update board with user turn
-        const nextSquares = tiles.slice();  // creates a copy
+        
+      // update board with user turn
+        const nextSquares = tiles.slice();
         nextSquares[index] = "X";
         setTiles(nextSquares);
 
         // check for game over
-        const noWinner = !(nextSquares.includes(null)); // draw results in no null values
+        const isTie = !(nextSquares.includes(null));
         const userWins = calculateWinner(nextSquares) == 'X';
         
         if (userWins) {
             return handleGameOver('You Won!!');
         }
         
-        if (noWinner) {
+        if (isTie) {
             return handleGameOver("It's a tie!");
         } 
 
@@ -56,30 +56,25 @@ export default function Board({isUserFirst, setShowBoard}: BoardProps) {
         
     };
 
-    const opponentTurn = (nextSquares: (string | null)[]) => {
+    const opponentTurn = (board: (string | null)[]) => {
       
-         const opponentGuess = calculateOpponentTurn(nextSquares);
-        
-         // play opponent turn
-         nextSquares[opponentGuess] = 'O';
-         setTiles(nextSquares);
-         return nextSquares;
+         const opponentGuess = calculateOpponentTurn(board);
+         board[opponentGuess] = 'O';
+         setTiles(board);
+         return board;
     }
 
     const handleGameOver = (message: string) => {
         setGameOver(true);
-        setShowPlayAgainButton(true);
         setGameOverText(message);
     }
 
     const handleOnPlayAgainButton = () => {
-        setModalVisible(!modalVisible)
-
-        // reset board
-         setTiles(Array(9).fill(null));
-         setGameOverText(null);
-         setShowPlayAgainButton(false);
-         setShowBoard(false);
+      // reset board
+      setModalVisible(!modalVisible)
+      setTiles(Array(9).fill(null));
+      setGameOverText(null);
+      setShowBoard(false);
     }
 
   return (
@@ -88,18 +83,16 @@ export default function Board({isUserFirst, setShowBoard}: BoardProps) {
           animationType="slide"
           transparent={true}
           visible={gameOver}
-          onRequestClose={() => {setGameOver(!gameOver);
-          }}>
+          onRequestClose={() => {setGameOver(!gameOver)}}>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <Text style={styles.winText}>{gameOverText}</Text>
                     <Pressable
-                        style={[styles.button, styles.buttonClose]}
+                        style={styles.button}
                         onPress={handleOnPlayAgainButton}>
-                        <Text style={styles.buttonTextStyle}>Play Again</Text>
+                        <Text style={styles.buttonText}>Play Again</Text>
                     </Pressable>
                 </View>
-                
             </View>
           </Modal>
         <View style={styles.row}>
@@ -139,11 +132,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       modalView: {
-        margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        paddingVertical: 70,
-        paddingHorizontal: 65,
+        padding: 65,
+        justifyContent: 'flex-start',
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -159,14 +151,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 15,
         elevation: 2,
-      },
-      buttonClose: {
         backgroundColor: '#2196F3',
       },
-      buttonTextStyle: {
+      buttonText: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
       },
-      
 });

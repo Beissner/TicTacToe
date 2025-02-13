@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text} from 'react-native';
 
-import Header from '../components/Header';
 import Board from "../components/Board";
+import Header from '../components/Header';
 import Instructions from "@/components/Instructions";
 
 export default function TicTacToe() {

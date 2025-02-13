@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Button } from 'react-native'
-import React, {useState} from 'react'
+import { View, Text, StyleSheet, Button, Pressable } from 'react-native'
+import React from 'react'
 import Checkbox from 'expo-checkbox';
 
 interface InstructionsProps {
@@ -9,8 +9,6 @@ interface InstructionsProps {
 }
 export default function Instructions({handleOnPressButton, isUserFirst, setIsUserFirst}: InstructionsProps) {
     const INSTRUCTIONS = "To start a game select who takes the first turn";
-
-    
 
   return (
     <View>
@@ -23,15 +21,11 @@ export default function Instructions({handleOnPressButton, isUserFirst, setIsUse
         <Checkbox style={styles.checkbox} value={!isUserFirst} onValueChange={() => setIsUserFirst(false)} />
         <Text style={styles.paragraph}>Computer</Text>
       </View>
-      <View style={styles.startButton}>
-        <Button
-                onPress={() => handleOnPressButton(isUserFirst)}
-                disabled={isUserFirst === undefined}
-                title={"Start Game"}
-                color="#000"
-            />
-      </View>
-      
+      <Pressable
+          style={styles.startButton}
+          onPress={() => handleOnPressButton(isUserFirst)}>
+          <Text style={styles.buttonText}>Start Game</Text>
+      </Pressable>
     </View>
   )
 }
@@ -53,10 +47,16 @@ const styles = StyleSheet.create({
       margin: 8,
     },
     startButton: {
-        marginTop: 20,
-        borderWidth: 0.5,
-        borderRadius: 10,
-        borderColor: 'green',
-        marginBottom: 10,
-      }, 
+      marginTop: 35,
+      borderRadius: 20,
+      paddingHorizontal: 30,
+      paddingVertical: 15,
+      elevation: 2,
+      backgroundColor: '#2196F3',
+    },
+    buttonText: {
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
   });

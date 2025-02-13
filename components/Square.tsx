@@ -10,8 +10,8 @@ interface SquareProps {
 export default function Square({ value, handleOnPress, disabled }: SquareProps) {
 
     return (
-        <Pressable style={styles.container} onPress={() => handleOnPress('X')} disabled={disabled}>
-        <Text>{value}</Text>
+        <Pressable style={styles.container} onPress={() => handleOnPress('X')} disabled={disabled || value !== null}>
+            <Text>{value}</Text>
         </Pressable>
     )
 }
@@ -25,6 +25,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#FFF',
-       
     },
 });

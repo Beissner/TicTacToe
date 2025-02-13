@@ -1,6 +1,8 @@
+// calculates if user or computer won
 // returns 'X' if user is winner
-// return 'O' if computer is winner
-export default function calculateWinner(tiles: (string|null)[]) {
+// returns 'O' if computer is winner
+// returns null for no win
+export function calculateWinner(tiles: (string|null)[]) {
     const possibleWinCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -23,7 +25,5 @@ export default function calculateWinner(tiles: (string|null)[]) {
         }
     }
     
-    // if no winning combo found, return null
     return null;
-
 }
