@@ -44,7 +44,7 @@ This app is a classic game of Tic Tac Toe built with React Native and Expo. The 
    npm install
    ```
 
-3. Start the App
+4. Start the App
 - To start the Expo development server
    ```bash
     npx expo start
