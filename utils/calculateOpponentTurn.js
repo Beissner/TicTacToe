@@ -4,7 +4,7 @@ import { miniMax } from "./miniMax";
 export function calculateOpponentTurn(board) {
 
   // calculate best move 
-  const bestMove = miniMax(board, true);
+  const bestMove = miniMax(board, 0, false);
   
   return bestMove.openIndex;
 }
