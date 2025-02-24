@@ -16,7 +16,6 @@ export default function Header({ title }: HeaderProps) {
 const styles = StyleSheet.create({
     header: {
         fontSize: 28,
-        marginBottom: 40,
     }
   });
   

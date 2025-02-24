@@ -1,5 +1,5 @@
-import {Text, Pressable, StyleSheet } from 'react-native'
-import React from 'react'
+import {Text, Pressable, StyleSheet, Animated, View } from 'react-native'
+import React, { useEffect, useRef } from 'react'
 
 interface SquareProps {
     value: string | null;
@@ -9,10 +9,27 @@ interface SquareProps {
 
 export default function Square({ value, handleOnPress, disabled }: SquareProps) {
 
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        if (value) {
+            Animated.timing(fadeAnim, {
+                toValue: 1,
+                duration: 300, // 300ms fade-in effect
+                useNativeDriver: true
+            }).start();
+        }
+    }, [value]);
+
     return (
-        <Pressable style={styles.container} onPress={() => handleOnPress('X')} disabled={disabled || value !== null}>
-            <Text>{value}</Text>
-        </Pressable>
+        
+            <Pressable style={styles.container} onPress={() => handleOnPress('X')} disabled={disabled || value !== null}>
+                <Animated.View style={{opacity: fadeAnim}}>
+                    <Text>{value}</Text>
+                </Animated.View>
+            </Pressable>
+       
+       
     )
 }
 
