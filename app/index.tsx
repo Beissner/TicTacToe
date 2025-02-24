@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import TicTacToe from "./TicTacToe";
 
 export default function Index() {
@@ -9,11 +9,10 @@ export default function Index() {
   );
 }
 
-
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }, 
-  });
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

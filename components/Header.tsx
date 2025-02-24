@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
 
 interface HeaderProps {
-    title: string;
+  title: string;
 }
 
 export default function Header({ title }: HeaderProps) {
@@ -10,12 +10,11 @@ export default function Header({ title }: HeaderProps) {
     <View>
       <Text style={styles.header}>{title}</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    header: {
-        fontSize: 28,
-    }
-  });
-  
+  header: {
+    fontSize: 28,
+  },
+});

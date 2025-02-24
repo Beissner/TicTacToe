@@ -16,6 +16,7 @@ This app is a classic game of Tic Tac Toe built with React Native and Expo. The 
 - Expo: Platform for developing React Native apps
 - Typescript: For static typing
 - Jest/React Native Testing Library: JavaScript testing framework
+- Linting: ESLint and Prettier to help maintain code quality and formatting
 
 
 ## Project Structure
