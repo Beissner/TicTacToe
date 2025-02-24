@@ -3,8 +3,7 @@ import TicTacToe from "./TicTacToe";
 
 export default function Index() {
   return (
-    <View style={styles.container}
-    >
+    <View style={styles.container}>
       <TicTacToe />
     </View>
   );

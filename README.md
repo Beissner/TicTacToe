@@ -64,3 +64,11 @@ This app is a classic game of Tic Tac Toe built with React Native and Expo. The 
 - +10 for an AI win
 - -10 for a player win
 - 0 for a tie
+
+### Future Improvements
+- test on smaller devices (developed on iPhone 15)
+- refactor to rules based approach for better performance
+- option for 4x4 board
+- option for 2 player
+- add dark theme option (incorporate context hook)
+- add images in README
